@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/footer";
+import { Provider } from "@/components/ui/provider"
 import Header from "@/components/header";
 
 const geistSans = localFont({
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   creator: "John Raizada",
   publisher: "John Raizada",
   robots: "index, follow",
+  icons: "/favicon.ico",
   openGraph: {
     title: "Khojo Mojo",
     description: "Reunite with your lost items. Search our database or report an item to connect with someone who can help. Reclaim your lost belongings or help someone find theirs.",
@@ -59,13 +61,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
+      <Provider>
         <Header/>
         {children}
         <Footer />
+      </Provider>
       </body>
     </html>
   );
